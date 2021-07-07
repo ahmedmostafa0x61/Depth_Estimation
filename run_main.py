@@ -5,7 +5,7 @@ import glob
 import torch
 import utils
 import cv2
-import argparse
+import timm
 
 from torchvision.transforms import Compose
 from midas.dpt_depth import DPTDepthModel
@@ -13,17 +13,16 @@ from midas.midas_net import MidasNet
 from midas.midas_net_custom import MidasNet_small
 from midas.transforms import Resize, NormalizeImage, PrepareForNet
 
-## Desktop Libraries
+# Desktop Libraries
 
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.uic import loadUiType
 
-import matplotlib.pyplot as plt
 import sys
-
-Program, _ = loadUiType('main1.ui')
+from main_ui import Ui_MainWindow as Program
+# Program, _ = loadUiType('main_ui.ui')
 
 
 class MainApp(QMainWindow, Program):
@@ -43,14 +42,14 @@ class MainApp(QMainWindow, Program):
         pixmap = QPixmap(imagePath)
         self.img_before.setPixmap(QPixmap(pixmap))
 
-    def convert(self, output_path='', model_path='', model_type="large", optimize=True):
+    def convert(self, optimize=True):
         global imagePath
 
         # initialization
         model_type = "dpt_large"
         model_path = "weights/dpt_large-midas-2f21e586.pt"
 
-        '''Remove this and uncomment the above'''
+        '''When adding {DPT_LARGE} Remove this and uncomment the above'''
         model_type = "midas_v21_small"
         model_path = "weights/midas_v21_small-70d6b9c8.pt"
 
@@ -118,7 +117,6 @@ class MainApp(QMainWindow, Program):
         print("start processing")
 
         # input
-
         img = utils.read_image(imagePath)
         img_input = transform({"image": img})["image"]
 
@@ -141,15 +139,6 @@ class MainApp(QMainWindow, Program):
                     .numpy()
             )
 
-        # output = prediction.cpu().numpy()
-        #
-        # plt.imshow(output)  # , cmap='gray')
-        # plt.axis('off')
-        # plt.savefig('Converted', bbox_inches='tight', pad_inches=0)
-
-
-        #
-        # output
         output_path = os.getcwd()
         filename = os.path.join(
             output_path, os.path.splitext(os.path.basename(imagePath))[0]
@@ -160,6 +149,7 @@ class MainApp(QMainWindow, Program):
         self.img_after.setPixmap(qpic)
 
 
+# Original code main function
 def run(input_path, output_path, model_path, model_type="large", optimize=True):
     """Run MonoDepthNN to compute depth maps.
 
@@ -333,6 +323,8 @@ if __name__ == "__main__":
 
     # compute depth maps
     # run(args.input_path, args.output_path, args.model_weights, args.model_type, args.optimize)
+
+    # Run Desktop app
     app = QApplication(sys.argv)
     window = MainApp()
     window.show()
