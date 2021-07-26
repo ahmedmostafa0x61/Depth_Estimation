@@ -22,8 +22,9 @@
   <property name="styleSheet">
    <string notr="true">QMainWindow{
 
+/*
 background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0.2 #136a8a, stop:1 #136a8a);
-
+*/
 }
 
 #2C3E50
@@ -112,7 +113,7 @@ QPushButton:pressed {
       <item>
        <widget class="QLabel" name="img_before">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -140,11 +141,14 @@ QPushButton:pressed {
         <property name="styleSheet">
          <string notr="true">border: 1px solid black;</string>
         </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
         <property name="text">
          <string>No Image Selected</string>
         </property>
         <property name="scaledContents">
-         <bool>true</bool>
+         <bool>false</bool>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -334,7 +338,7 @@ QPushButton:pressed {
       <item>
        <widget class="QLabel" name="img_after">
         <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -352,7 +356,10 @@ QPushButton:pressed {
          <string/>
         </property>
         <property name="scaledContents">
-         <bool>true</bool>
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>

@@ -23,9 +23,11 @@ from PyQt5.uic import loadUiType
 
 import sys
 
-from app_ui import Ui_MainWindow as Program
+# from app_ui import Ui_MainWindow as Program
+
+
 # Or use the following
-# Program, _ = loadUiType('app_ui2.ui')
+Program, _ = loadUiType('app_ui.ui')
 
 
 class MainApp(QMainWindow, Program):
@@ -33,7 +35,7 @@ class MainApp(QMainWindow, Program):
         super(MainApp, self).__init__()
         QMainWindow.__init__(self)
         self.setupUi(self)
-        self.model_initialization()
+        # self.model_initialization()
         self.showMaximized()
         self.user_action()
         self.button_shortcuts()
@@ -63,7 +65,9 @@ class MainApp(QMainWindow, Program):
         fname = QFileDialog.getOpenFileName(self, 'Open file')
         imagePath = fname[0]
         pixmap = QPixmap(imagePath)
-        self.img_before.setPixmap(QPixmap(pixmap))
+        width = self.img_before.width()  # Box width
+        height = self.img_before.height()  # Box height
+        self.img_before.setPixmap(pixmap.scaled(width, height, Qt.KeepAspectRatio))
         self.button_activate('convert')
 
     def model_initialization(self):
@@ -211,7 +215,9 @@ class MainApp(QMainWindow, Program):
 
         # Show the Depth Map into QWidget
         qpic = QPixmap(pic_path)
-        self.img_after.setPixmap(qpic)
+        width = self.img_after.width()  # Box width
+        height = self.img_after.height()  # Box height
+        self.img_after.setPixmap(qpic.scaled(width, height, Qt.KeepAspectRatio))
         self.button_activate('save')
 
     def save_image(self):
@@ -226,6 +232,6 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     window = MainApp()
     window.setWindowTitle('Arabesque')
-    # window.setWindowIcon(QIcon('icon.ico'))
+    window.setWindowIcon(QIcon('layers.ico'))
     window.show()
     app.exec_()

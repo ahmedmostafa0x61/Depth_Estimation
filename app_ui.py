@@ -22,8 +22,9 @@ class Ui_MainWindow(object):
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setStyleSheet("QMainWindow{\n"
 "\n"
+"/*\n"
 "background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0.2 #136a8a, stop:1 #136a8a);\n"
-"\n"
+"*/\n"
 "}\n"
 "\n"
 "#2C3E50\n"
@@ -77,7 +78,7 @@ class Ui_MainWindow(object):
         self.original_label.setObjectName("original_label")
         self.verticalLayout.addWidget(self.original_label)
         self.img_before = QtWidgets.QLabel(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.img_before.sizePolicy().hasHeightForWidth())
@@ -91,7 +92,8 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.img_before.setFont(font)
         self.img_before.setStyleSheet("border: 1px solid black;")
-        self.img_before.setScaledContents(True)
+        self.img_before.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.img_before.setScaledContents(False)
         self.img_before.setAlignment(QtCore.Qt.AlignCenter)
         self.img_before.setObjectName("img_before")
         self.verticalLayout.addWidget(self.img_before)
@@ -174,7 +176,7 @@ class Ui_MainWindow(object):
         self.convert_label.setObjectName("convert_label")
         self.verticalLayout_2.addWidget(self.convert_label)
         self.img_after = QtWidgets.QLabel(self.centralwidget)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.MinimumExpanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.img_after.sizePolicy().hasHeightForWidth())
@@ -182,7 +184,8 @@ class Ui_MainWindow(object):
         self.img_after.setMaximumSize(QtCore.QSize(1000, 800))
         self.img_after.setStyleSheet("border: 1px solid black;")
         self.img_after.setText("")
-        self.img_after.setScaledContents(True)
+        self.img_after.setScaledContents(False)
+        self.img_after.setAlignment(QtCore.Qt.AlignCenter)
         self.img_after.setObjectName("img_after")
         self.verticalLayout_2.addWidget(self.img_after)
         self.save_pb = QtWidgets.QPushButton(self.centralwidget)
